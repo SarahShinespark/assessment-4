@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post Detail</title>
+</head>
+<body>
+    <nav id="body-nav">
+
+
+    </nav>
+    <main id="body-main">
+        <h2>Category: {{category.category_name}}</h2>
+        <h2>{{post}}</h2>
+    <hr>
+    <pre><h4><a href="{% url 'categories:posts_edit' category.id post.id %}">Edit Post</a> &#9;<a href="{% url 'categories:posts_delete' category.id post.id %}">Delete Post</a></h4></pre>
+    <h4><a href="{% url 'categories:categories_detail' category.id %}">Back to Category</a></h4>
+    </main>
+    <footer id="body-footer">
+
+    </main>
+    <footer id="body-footer">
+
+    </footer>
+</body>
+</html>

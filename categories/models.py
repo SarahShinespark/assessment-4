@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Category(models.Model):
     category_name = models.CharField(max_length=40)
@@ -6,7 +7,7 @@ class Category(models.Model):
         return f"{self.category_name}"
 
 class Post(models.Model):
-    pub_date = models.DateTimeField('date published')
+    pub_date = models.DateTimeField('date published', default=datetime.now)
     post_text = models.CharField(max_length=900)
     #Belongs to a Category
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')

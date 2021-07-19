@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Craigslist Junior</title>
+</head>
+<body>
+    <nav id="body-nav">
+
+    </nav>
+    <main id="body-main">
+        <h2>New Post</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+        <button type="submit">Add New Post</button>
+        </form>
+        <hr>
+    <a href="{% url 'categories:categories_detail' category_id %}">Back to Category</a></h4></pre>
+    </main>
+    <footer id="body-footer">
+
+    </footer>
+</body>
+</html>

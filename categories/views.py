@@ -60,14 +60,52 @@ def cat_delete(request, category_id):
     return redirect('categories:categories_all')
 
 def post_new(request, category_id):
-    return HttpResponse("Hello, world. You're at the new post page.")
+    form = PostForm(request.POST or None)
+
+    if request.method == "POST":
+        try:
+            form.save()
+            return redirect("categories:categories_all")
+        except Exception as e:
+            print(e)
+            return HttpResponse("Error creating new post!")
+
+    data = {"form": form, "category_id": category_id}
+    return render(request, "pages/posts/post_new.html", data)
 
 def post_detail(request, category_id, post_id):
-    return HttpResponse(f"Hello, world. You're at the post page for category {category_id}, post {post_id}.")
+    try:
+        category = Category.objects.get(pk=category_id)
+        post =    Post.objects.get(pk=post_id)
+    except Exception as e:
+        print(e)
+        return HttpResponse("Failed to retrieve post.")
+    
+    data = {"category": category, "post": post}
+    return render(request, "pages/posts/post_details.html", data)
 
 def post_edit(request, category_id, post_id):
-    return HttpResponse("Hello, world. You're at the post edit page.")
+    try:
+        post = Post.objects.get(pk=post_id)
+    except:
+        print("error")
+        return HttpResponse("That post doesn't exist!")
+    
+    form = PostForm(request.POST or None, instance=post)
+
+    if request.method == "POST":
+        try:
+            form.save()
+            return redirect("categories:posts_detail", category_id=category_id, post_id=post_id)
+        except Exception as e:
+            print(e)
+            return HttpResponse("Error updating post!")
+
+    data = {"form": form, "category_id": category_id, "post_id": post_id}
+    return render(request, "pages/posts/post_edit.html", data)
 
 def post_delete(request, category_id, post_id):
-    return HttpResponse("Hello, world. You're at the post delete page.")
+    post = Post.objects.get(id=post_id)
+    post.delete()
+    return redirect('categories:categories_detail', category_id=category_id)
 
