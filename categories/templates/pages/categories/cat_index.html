@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Craigslist Junior Categories</title>
+</head>
+<body>
+    <nav id="body-nav">
+
+    </nav>
+    <main id="body-main">
+        <h2>Craigslist Junior categories</h2>
+    <ul>
+        {% for c in categories %}
+        <h3>{{c}}</h3>
+        {% endfor %}
+    </ul>
+    <hr>
+    <pre><h4><a href="{% url 'categories:categories_new' %}">New category</a> &#9;<a href="../">Back to home</a></h4></pre>
+    </main>
+    <footer id="body-footer">
+
+    </footer>
+</body>
+</html>

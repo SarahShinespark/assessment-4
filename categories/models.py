@@ -3,7 +3,7 @@ from django.db import models
 class Category(models.Model):
     category_name = models.CharField(max_length=40)
     def __str__(self):
-        return f"Category: {self.category_name}"
+        return f"{self.category_name}"
 
 class Post(models.Model):
     pub_date = models.DateTimeField('date published')
