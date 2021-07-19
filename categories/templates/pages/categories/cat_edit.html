@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Craigslist Junior</title>
+</head>
+<body>
+    <nav id="body-nav">
+
+    </nav>
+    <main id="body-main">
+        <h2>Edit {{category.category_name}}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+        <button type="submit">Save Changes</button>
+        </form>
+    <a href="{% url 'categories:categories_delete' category.id %}"><button>Delete Category</button></a> (Warning! This will delete all posts in {{category.category_name}}!)
+        <hr>
+    <a href="{% url 'categories:categories_all' %}">Back to Category list</a></h4></pre>
+    </main>
+    <footer id="body-footer">
+
+    </footer>
+</body>
+</html>

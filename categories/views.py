@@ -24,13 +24,40 @@ def cat_new(request):
     return render(request, "pages/categories/cat_new.html", data)
 
 def cat_detail(request, category_id):
-    return HttpResponse(f"Hello, world. You're at the categories page for {category_id}.")
-
+    try:
+        category = Category.objects.get(pk=category_id)
+        posts =    category.posts.all()
+    except Exception as e:
+        print(e)
+        return HttpResponse("That category doesn't exist!")
+    
+    data = {"category": category, "posts": posts}
+    return render(request, "pages/categories/cat_details.html", data)
+    
 def cat_edit(request, category_id):
-    return HttpResponse("Hello, world. You're at the categories edit page.")
+    try:
+        category = Category.objects.get(pk=category_id)
+    except:
+        print("error")
+        return HttpResponse("That category doesn't exist!")
+    
+    form = CategoryForm(request.POST or None, instance=category)
+
+    if request.method == "POST":
+        try:
+            form.save()
+            return redirect("categories:categories_detail", category_id=category_id)
+        except Exception as e:
+            print(e)
+            return HttpResponse("Error updating category!")
+
+    data = {"form": form, "category": category}
+    return render(request, "pages/categories/cat_edit.html", data)
 
 def cat_delete(request, category_id):
-    return HttpResponse("Hello, world. You're at the categories delete page.")
+    category = Category.objects.get(id=category_id)
+    category.delete()
+    return redirect('categories:categories_all')
 
 def post_new(request, category_id):
     return HttpResponse("Hello, world. You're at the new post page.")

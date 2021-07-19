@@ -11,7 +11,7 @@
         <h2>Craigslist Junior categories</h2>
     <ul>
         {% for c in categories %}
-        <h3>{{c}}</h3>
+        <h3><a href="{% url 'categories:categories_detail' c.id %}">{{c}}</a></h3>
         {% endfor %}
     </ul>
     <hr>

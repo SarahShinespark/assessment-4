@@ -11,6 +11,7 @@ class Post(models.Model):
     #Belongs to a Category
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')
     def __str__(self):
-        return f"Post: Published {self.pub_date}: {self.post_text}"
+        formatted_date = self.pub_date.strftime("%A %B %d, %Y - %H:%M:%S")
+        return f"Published {formatted_date}: {self.post_text}"
         
     

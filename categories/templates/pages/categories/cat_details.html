@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Craigslist Junior {{category.category_name}}</title>
+</head>
+<body>
+    <nav id="body-nav">
+
+    </nav>
+    <main id="body-main">
+        <h2>{{category.category_name}}</h2>
+    {% if posts|length == 0 %}
+        <h3>No posts found.</h3>
+    {% else %}    <ul>
+        {% for p in posts %}
+        <h3>
+            <a href=#>edit</a> 
+            <a href=#>delete</a>
+            {{p}}
+        </h3>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <hr>
+    <h4><a href="{% url 'categories:categories_edit' category.id %}">Edit {{category.category_name}}</a></h4>
+    <h4><a href="{% url 'categories:categories_all' %}">Back to Category list</a></h4>
+    </main>
+    <footer id="body-footer">
+
+    </footer>
+</body>
+</html>
